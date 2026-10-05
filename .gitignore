@@ -216,3 +216,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- 3-Layer Agent Architecture Additions ---
+# Intermediate files (never commit, always regenerated)
+.tmp/*
+!.tmp/.gitkeep
+
+# OAuth credentials
+credentials.json
+token.json
+
+# Large Data Files (exceeding GitHub 100MB limits, stored locally)
+*.csv
+*.zip
+*.parquet
+Assignment Details/Datasets/5EnvSensor_MayToDec2024_180kRows/
+Assignment Details/Datasets/5occupancySensor_MayToDec2024_9MRows/
+Assignment Details/Datasets/*.zip
