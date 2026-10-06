@@ -45,8 +45,14 @@ plt.rcParams.update({
 
 def plot_fig1_time_series(df: pd.DataFrame, output_path: Path, window_days: int = 5) -> None:
     """Plot multi-panel environmental and occupancy dynamics."""
-    # Take a representative 5-day window
-    df_sub = df.iloc[: min(len(df), window_days * 288)].copy()
+    # Take a representative continuous operational window during active semester (Monday to Friday)
+    ts = pd.to_datetime(df["timestamp"])
+    start_dt = pd.Timestamp("2024-03-04 00:00:00+00:00")
+    end_dt = start_dt + pd.Timedelta(days=window_days)
+    df_sub = df[(ts >= start_dt) & (ts < end_dt)].copy()
+    if len(df_sub) < 50:
+        df_sub = df.iloc[15 : 15 + window_days * 288].copy()
+
     time_hours = (pd.to_datetime(df_sub["timestamp"]) - pd.to_datetime(df_sub["timestamp"].iloc[0])).dt.total_seconds() / 3600.0
 
     fig, axes = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
@@ -54,7 +60,7 @@ def plot_fig1_time_series(df: pd.DataFrame, output_path: Path, window_days: int 
     # Panel 1: Ground truth occupancy
     axes[0].plot(time_hours, df_sub["headcount"], color="#1f77b4", lw=2, label="Headcount (people)")
     axes[0].set_ylabel("Headcount")
-    axes[0].set_title("(a) Ground Truth Occupancy Headcount (Room G.57)")
+    axes[0].set_title("(a) Ground Truth Occupancy Headcount (Room G.57 - 5-Day University Week)")
     axes[0].legend(loc="upper right")
     axes[0].grid(True, alpha=0.3)
 
@@ -72,7 +78,7 @@ def plot_fig1_time_series(df: pd.DataFrame, output_path: Path, window_days: int 
     l2 = ax3_twin.plot(time_hours, df_sub["humidity_rh"], color="#2ca02c", lw=1.8, ls="-.", label="Relative Humidity (%RH)")
     axes[2].set_ylabel("Temperature (C)")
     ax3_twin.set_ylabel("Relative Humidity (%)")
-    axes[2].set_xlabel("Elapsed Time (hours)")
+    axes[2].set_xlabel("Elapsed Time (hours from Monday 00:00)")
     axes[2].set_title("(c) Thermal & Humidity Climate Conditions")
 
     lines = l1 + l2
@@ -88,14 +94,20 @@ def plot_fig1_time_series(df: pd.DataFrame, output_path: Path, window_days: int 
 
 def plot_fig2_derivative_dynamics(df: pd.DataFrame, output_path: Path, window_days: int = 3) -> None:
     """Plot CO2 concentration alongside 2nd-order central difference derivative."""
-    df_sub = df.iloc[: min(len(df), window_days * 288)].copy()
+    ts = pd.to_datetime(df["timestamp"])
+    start_dt = pd.Timestamp("2024-03-04 00:00:00+00:00")
+    end_dt = start_dt + pd.Timedelta(days=window_days)
+    df_sub = df[(ts >= start_dt) & (ts < end_dt)].copy()
+    if len(df_sub) < 50:
+        df_sub = df.iloc[15 : 15 + window_days * 288].copy()
+
     time_hours = (pd.to_datetime(df_sub["timestamp"]) - pd.to_datetime(df_sub["timestamp"].iloc[0])).dt.total_seconds() / 3600.0
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 6), sharex=True)
 
     ax1.plot(time_hours, df_sub["co2_ppm"], color="#d62728", lw=2, label="CO2 Concentration")
     ax1.set_ylabel("CO2 (ppm)")
-    ax1.set_title("(a) Smoothed Indoor CO2 Concentration")
+    ax1.set_title("(a) Smoothed Indoor CO2 Concentration (3-Day Operational Window)")
     ax1.legend(loc="upper right")
 
     # Derivative
@@ -105,7 +117,7 @@ def plot_fig2_derivative_dynamics(df: pd.DataFrame, output_path: Path, window_da
     ax2.fill_between(time_hours, 0, rate, where=(rate > 0), color="#2ca02c", alpha=0.25, label="Positive Accumulation (Entry)")
     ax2.fill_between(time_hours, 0, rate, where=(rate < 0), color="#d62728", alpha=0.25, label="Negative Decay (Purge/Exit)")
     ax2.set_ylabel("d[CO2]/dt (ppm/min)")
-    ax2.set_xlabel("Elapsed Time (hours)")
+    ax2.set_xlabel("Elapsed Time (hours from Monday 00:00)")
     ax2.set_title("(b) 2nd-Order Central Difference Numerical Rate of Change")
     ax2.legend(loc="upper right")
 
