@@ -6,7 +6,7 @@ Core Python engineering modules implementing first-principles numerical algorith
 
 1. **`numerical_methods.py`**
    - Natural cubic spline interpolation for variable-interval alignment ($\mathcal{O}(h^4)$ error).
-   - Higher-order finite difference stencils (4th-order central difference $\mathcal{O}(h^4)$, backward $\mathcal{O}(h^2)$, forward $\mathcal{O}(h^2)$) with dynamic step sizes ($h_i \neq h_{i+1}$).
+   - Higher-order finite difference stencils, 4th-order central difference $\mathcal{O}(h^4)$, backward $\mathcal{O}(h^2)$, forward $\mathcal{O}(h^2)$, with dynamic step sizes ($h_i \neq h_{i+1}$).
    - Composite numerical quadrature (Simpson's 1/3 and 3/8 rules) for cumulative energy and air exchange integrals.
    - Out-of-Distribution (OOD) envelope detection via Mahalanobis distance with physical thresholding ($\chi^2_{p, 0.999}$).
 
