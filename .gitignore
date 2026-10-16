@@ -234,3 +234,14 @@ token.json
 Assignment Details/Datasets/5EnvSensor_MayToDec2024_180kRows/
 Assignment Details/Datasets/5occupancySensor_MayToDec2024_9MRows/
 Assignment Details/Datasets/*.zip
+
+# Local Course Notes, Study Walkthroughs & Agent Helper Files
+Content/
+directives/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+My Understanding/
+test_file.txt
+.env
+.env.*

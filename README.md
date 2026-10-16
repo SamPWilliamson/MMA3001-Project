@@ -23,12 +23,10 @@ The repository is organised into modular, testable components designed for compl
 ├── data/                              # Lightweight reproducible benchmark telemetry
 │   └── sample_g57_features.parquet    # Synchronised 2-week campus slice (160 KB)
 
-├── directives/                        # Engineering Specifications & Protocols (Markdown)
-│   ├── 01_extract_and_clean_data.md
-│   ├── 02_feature_engineering_numerical.md
-│   ├── 03_model_training_and_comparison.md
-│   ├── 04_validation_and_profiling.md
-│   └── 05_generate_deliverables.md
+├── Assignment Details/                # Unit Specification & Sensor Metadata
+│   ├── MMA3001_2026_Project_Brief.pdf # Official project guidelines and rubrics
+│   ├── MMA3001 Project Datasets.pdf   # Technical dataset documentation
+│   └── Datasets/                      # Sensor identifiers and physical placement map
 ├── execution/                         # Deterministic Python Engineering Modules
 │   ├── numerical_methods.py           # First-principles numerical routines (splines, derivatives, quadrature, OOD)
 │   ├── data_pipeline.py               # Out-of-core streaming ETL pipeline (180k env + 9.1M counter rows)
