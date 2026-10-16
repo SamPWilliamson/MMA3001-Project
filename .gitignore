@@ -217,7 +217,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# --- 3-Layer Agent Architecture Additions ---
+# --- Project Working & Cache Artifacts ---
 # Intermediate files (never commit, always regenerated)
 .tmp/*
 !.tmp/.gitkeep
@@ -230,6 +230,7 @@ token.json
 *.csv
 *.zip
 *.parquet
+!data/sample_g57_features.parquet
 Assignment Details/Datasets/5EnvSensor_MayToDec2024_180kRows/
 Assignment Details/Datasets/5occupancySensor_MayToDec2024_9MRows/
 Assignment Details/Datasets/*.zip

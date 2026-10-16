@@ -1,5 +1,6 @@
 # Physics-Informed Numerical Differentiation & Machine Learning for Smart Facility Occupancy Inference
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_HomeBase.ipynb)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![Unit Tests](https://img.shields.io/badge/pytest-13%20passed-brightgreen.svg)]()
 [![Documentation](https://img.shields.io/badge/pdoc-HTML5%20Docs-blue.svg)](docs/index.html)
@@ -9,20 +10,26 @@ Engineering implementation, numerical methods library, benchmarking suite, and d
 
 Target Facility: **Monash Building 69, Room G.57 (Smart Infrastructure / Living Lab)**.
 
+> 🚀 **Google Colab "Home Base" Notebook:** Launch the complete interactive project dossier in one click: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_HomeBase.ipynb)
+
 ---
 
-## Repository Architecture & 3-Layer Taxonomy
+## Repository Structure & Overview
 
-The codebase adheres strictly to a robust 3-layer architecture separating human intent from deterministic execution:
+The repository is organised into modular, testable components designed for complete end-to-end reproducibility:
 
 ```
-├── directives/                        # Layer 1: SOPs & Engineering Instructions (Markdown)
+├── MMA3001_Project_HomeBase.ipynb     # Interactive Google Colab "Home Base" Project Dossier
+├── data/                              # Lightweight reproducible benchmark telemetry
+│   └── sample_g57_features.parquet    # Synchronised 2-week campus slice (160 KB)
+
+├── directives/                        # Engineering Specifications & Protocols (Markdown)
 │   ├── 01_extract_and_clean_data.md
 │   ├── 02_feature_engineering_numerical.md
 │   ├── 03_model_training_and_comparison.md
 │   ├── 04_validation_and_profiling.md
 │   └── 05_generate_deliverables.md
-├── execution/                         # Layer 3: Deterministic Python Modules
+├── execution/                         # Deterministic Python Engineering Modules
 │   ├── numerical_methods.py           # First-principles numerical routines (splines, derivatives, quadrature, OOD)
 │   ├── data_pipeline.py               # Out-of-core streaming ETL pipeline (180k env + 9.1M counter rows)
 │   ├── feature_engineering.py         # Physics-informed rate-of-change and quadrature calculations
@@ -30,7 +37,7 @@ The codebase adheres strictly to a robust 3-layer architecture separating human 
 │   ├── train_and_evaluate.py          # Chronological 80/20 train/test evaluation & metric tracking
 │   ├── evaluation_and_profiling.py    # Latency (us), peak memory (KB), FLOP estimation & OOD verification
 │   └── visualizations.py              # Publication-quality figure generation (Matplotlib/Seaborn)
-├── deliverables/                      # Layer 2 Deliverables (Academic Outputs)
+├── deliverables/                      # Project Deliverables & Academic Outputs
 │   ├── MMA3001_Project_Report.md      # Comprehensive 10-section academic project report
 │   ├── Presentation_Demonstration_Script.md # 8-slide deck structure, 7-min oral script & Q&A defense guide
 │   └── figures/                       # Publication-quality vector/raster analytical figures
