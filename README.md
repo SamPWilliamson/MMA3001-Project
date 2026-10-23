@@ -39,8 +39,7 @@ The repository is organised into modular, testable components designed for compl
 │   ├── evaluation_and_profiling.py    # Latency (us), peak memory (KB), FLOP estimation & OOD verification
 │   └── visualizations.py              # Publication-quality figure generation (Matplotlib/Seaborn)
 ├── deliverables/                      # Project Deliverables & Academic Outputs
-│   ├── MMA3001_Project_Report.md      # Comprehensive 10-section academic project report
-│   ├── Presentation_Demonstration_Script.md # 8-slide deck structure, 7-min oral script & Q&A defense guide
+│   ├── MMA3001_Project_Report.pdf     # Official compiled academic written project report
 │   └── figures/                       # Publication-quality vector/raster analytical figures
 │       ├── fig1_environmental_time_series.png
 │       ├── fig2_numerical_derivative_dynamics.png
@@ -125,7 +124,7 @@ python -m venv .venv
 source .venv/bin/activate
 
 # Install required dependencies
-pip install -r requirements.txt
+pip install pyarrow scikit-learn matplotlib seaborn pytest pdoc python-dotenv
 ```
 
 #### 2. Option A: Run the Notebook Locally

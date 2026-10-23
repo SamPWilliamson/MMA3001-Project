@@ -245,3 +245,9 @@ My Understanding/
 test_file.txt
 .env
 .env.*
+
+# Microsoft Office lock files & working drafts
+~$*
+~*.tmp
+deliverables/*.docx
+MAE3405 Assignment 3.docx
