@@ -1,16 +1,19 @@
 # Physics-Informed Numerical Differentiation & Machine Learning for Smart Facility Occupancy Inference
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_HomeBase.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_Notebook.ipynb)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![Unit Tests](https://img.shields.io/badge/pytest-13%20passed-brightgreen.svg)]()
-[![Documentation](https://img.shields.io/badge/pdoc-HTML5%20Docs-blue.svg)](docs/index.html)
+[![Documentation](https://img.shields.io/badge/pdoc-HTML5%20Docs-blue.svg)](https://sampwilliamson.github.io/MMA3001-Project/)
 [![Unit Code](https://img.shields.io/badge/Monash-MMA3001-orange.svg)]()
 
 Engineering implementation, numerical methods library, benchmarking suite, and deliverables for the **MMA3001 Numerical Methods and Machine Learning Major Project** (Monash University, Department of Mechanical and Aerospace Engineering).
 
 Target Facility: **Monash Building 69, Room G.57 (Smart Infrastructure / Living Lab)**.
 
-> 🚀 **Google Colab "Home Base" Notebook:** Launch the complete interactive project dossier in one click: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_HomeBase.ipynb)
+> 🚀 **Interactive Project Resources:**
+> * **Live Web Documentation:** [https://sampwilliamson.github.io/MMA3001-Project/](https://sampwilliamson.github.io/MMA3001-Project/)
+> * **Google Colab Executable Notebook:** [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_Notebook.ipynb)
+> * **GitHub Repository:** [https://github.com/SamPWilliamson/MMA3001-Project](https://github.com/SamPWilliamson/MMA3001-Project)
 
 ---
 
@@ -19,7 +22,7 @@ Target Facility: **Monash Building 69, Room G.57 (Smart Infrastructure / Living 
 The repository is organised into modular, testable components designed for complete end-to-end reproducibility:
 
 ```
-├── MMA3001_Project_HomeBase.ipynb     # Interactive Google Colab "Home Base" Project Dossier
+├── MMA3001_Project_Notebook.ipynb     # Interactive Google Colab "Home Base" Project Dossier
 ├── data/                              # Lightweight reproducible benchmark telemetry
 │   └── sample_g57_features.parquet    # Synchronised 2-week campus slice (160 KB)
 
@@ -45,7 +48,7 @@ The repository is organised into modular, testable components designed for compl
 │       ├── fig4_parity_plots_comparison.png
 │       ├── fig5_operational_confusion_matrices.png
 │       └── fig6_pareto_accuracy_vs_latency.png
-├── docs/                              # Compiled interactive HTML5 source documentation (via pdoc)
+├── docs/                              # Compiled interactive HTML5 source documentation (Live: https://sampwilliamson.github.io/MMA3001-Project/)
 │   ├── index.html
 │   └── execution/
 ├── tests/                             # Unit & Integration test suite
