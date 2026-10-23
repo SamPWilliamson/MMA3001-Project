@@ -28,9 +28,9 @@ def central_difference_derivative(
     Interior points:
         $$f'(x_i) \approx \frac{f(x_{i+1}) - f(x_{i-1})}{x_{i+1} - x_{i-1}} + \mathcal{O}(h^2)$$
 
-    Endpoints (1st-order forward / backward):
-        $$f'(x_0) \approx \frac{f(x_1) - f(x_0)}{x_1 - x_0}$$
-        $$f'(x_{n-1}) \approx \frac{f(x_{n-1}) - f(x_{n-2})}{x_{n-1} - x_{n-2}}$$
+    Endpoints (2nd-order single-sided forward / backward differences):
+        $$f'(x_0) \approx \frac{-3f(x_0) + 4f(x_1) - f(x_2)}{2h} + \mathcal{O}(h^2)$$
+        $$f'(x_{n-1}) \approx \frac{3f(x_{n-1}) - 4f(x_{n-2}) + f(x_{n-3})}{2h} + \mathcal{O}(h^2)$$
 
     Args:
         x: Strictly monotonic 1D array of coordinates (e.g. time in minutes).
@@ -75,9 +75,9 @@ def central_difference_derivative(
         h = dx_diffs[0]
         # Interior points (2nd-order central differences)
         dydx[1:-1] = (y_calc[2:] - y_calc[:-2]) / (2.0 * h)
-        # Boundary points (forward and backward differences)
-        dydx[0] = (y_calc[1] - y_calc[0]) / h
-        dydx[-1] = (y_calc[-1] - y_calc[-2]) / h
+        # Boundary points (2nd-order 3-point single-sided forward and backward differences)
+        dydx[0] = (-3.0 * y_calc[0] + 4.0 * y_calc[1] - y_calc[2]) / (2.0 * h)
+        dydx[-1] = (3.0 * y_calc[-1] - 4.0 * y_calc[-2] + y_calc[-3]) / (2.0 * h)
     else:
         # Non-uniform grid formulation
         for i in range(1, n - 1):
