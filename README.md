@@ -39,7 +39,7 @@ The repository is organised into modular, testable components designed for compl
 │   ├── evaluation_and_profiling.py    # Latency (us), peak memory (KB), FLOP estimation & OOD verification
 │   └── visualizations.py              # Publication-quality figure generation (Matplotlib/Seaborn)
 ├── deliverables/                      # Project Deliverables & Academic Outputs
-│   ├── MMA3001_Project_Report.pdf     # Official compiled academic written project report
+│   ├── MMA3001_Project_Report_PDF.pdf     # Official compiled academic written project report
 │   └── figures/                       # Publication-quality vector/raster analytical figures
 │       ├── fig1_environmental_time_series.png
 │       ├── fig2_numerical_derivative_dynamics.png
