@@ -180,15 +180,3 @@ pdoc -o docs -d google --math execution
 > ```
 
 ---
-
-## AI Acknowledgment & Academic Integrity Declaration
-
-This project utilized Artificial Intelligence (AI) tools in compliance with the Monash University Student Academic Integrity Policy.
-
-**Methodology of AI Use:**
-*   **Tools:** Google DeepMind Antigravity / Gemini Advanced Agentic Coding System.
-*   **Tasks:** Automated boilerplate scaffolding of Google-style Python docstrings, Markdown report formatting, LaTeX equation typography, and Matplotlib plotting configuration.
-
-**Human Oversight and Engineering Responsibility:**
-*   All mathematical formulations (including the Taylor series error derivations, mass-balance differential modeling, composite Simpson's quadrature, and tridiagonal Thomas algorithm implementations), data processing logic, chronological train/test partitioning, out-of-distribution bounds, and engineering interpretations were formulated, reviewed, verified, and validated by the author.
-*   The human author maintained full oversight and made all final decisions regarding the integration and modification of all code and analysis.
