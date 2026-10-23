@@ -81,69 +81,103 @@ Across **14,121 unseen held-out test intervals** under strict chronological eval
 
 ## Quickstart & Reproduction Workflow
 
-### 1. Prerequisites & Environment Setup
-Clone this repository and create a Python 3.11 virtual environment:
+The project is structured for **100% reproducible execution** across both cloud (zero-installation) and local workstation environments.
 
-```powershell
+### 🌟 Recommended: One-Click Cloud Execution (Google Colab)
+
+The primary and simplest way to reproduce the entire project—from first-principles numerical verification and machine learning benchmarking to automated unit testing and documentation compilation—is via the interactive **Google Colab "Home Base" Notebook**:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SamPWilliamson/MMA3001-Project/blob/main/MMA3001_Project_Notebook.ipynb)
+
+1. Open the notebook by clicking the **Open In Colab** badge above.
+2. Select **Runtime → Run all** (`Ctrl + F9` / `Cmd + F9`).
+
+**What the notebook executes automatically end-to-end:**
+* 📦 **Cloud Environment Scaffolding:** Clones the repository and installs all runtime dependencies (`pyarrow`, `scikit-learn`, `matplotlib`, `seaborn`, `pytest`, `pdoc`).
+* 📂 **Telemetry Ingestion:** Ingests the bundled reproducible campus benchmark dataset ([`data/sample_g57_features.parquet`](data/sample_g57_features.parquet)).
+* 🧮 **Numerical Methods Verification:** Numerically proves Taylor 2nd-order derivative $\mathcal{O}(h^2)$ convergence, Simpson's 1/3 quadrature $\mathcal{O}(h^4)$ error scaling, and natural cubic spline knot interpolation.
+* ⏱️ **Temporal Splitting:** Partitions telemetry into strict chronological 80% train / 20% test sets (preventing temporal data leakage).
+* 🏆 **Model Benchmarking:** Trains and evaluates Baseline KNN, Pruned Decision Tree, Gaussian Process Regressor (with analytical uncertainty), and Random Forest, outputting the complete evaluation scorecard.
+* 📊 **Diagnostic Engineering Plots:** Renders sensor dynamic responses with numerical derivatives, GPR 95% Bayesian confidence envelopes, and parity plots.
+* ⚡ **Hardware Profiling:** Computes microsecond CPU latency, peak resident memory footprints, and microcontroller edge feasibility.
+* 🛡️ **Fail-Safe Safety Envelope:** Traps simulated Out-of-Distribution (OOD) anomalies (sensor disconnects, fire surges, HVAC freezing) before BMS actuation.
+* 📄 **Interactive Documentation:** Live-compiles HTML5 docstring documentation to `docs/` via `pdoc`.
+* ✅ **Automated Unit Testing:** Executes the full 13-test test suite via `pytest` directly in the notebook (verifying 100% test pass rate).
+
+---
+
+### 💻 Local Reproduction & Developer Workflow
+
+If you prefer executing on your local machine:
+
+#### 1. Clone Repository & Set Up Environment
+```bash
+# Clone the repository
+git clone https://github.com/SamPWilliamson/MMA3001-Project.git
+cd MMA3001-Project
+
 # Create and activate virtual environment
 python -m venv .venv
+
+# On Windows (PowerShell):
 .\.venv\Scripts\Activate.ps1
+# On macOS / Linux:
+source .venv/bin/activate
 
 # Install required dependencies
 pip install -r requirements.txt
-# (or pip install numpy scipy pandas pyarrow scikit-learn matplotlib seaborn pytest pdoc python-dotenv)
 ```
 
-### 2. Run the Automated Unit Test Suite
-Verify that all numerical stencils, splines, quadrature, and pipeline tests pass:
-
-```powershell
-.\.venv\Scripts\pytest.exe -v
+#### 2. Option A: Run the Notebook Locally
+Launch JupyterLab or VSCode and execute all cells in [`MMA3001_Project_Notebook.ipynb`](MMA3001_Project_Notebook.ipynb):
+```bash
+jupyter notebook MMA3001_Project_Notebook.ipynb
 ```
+Select **Kernel → Restart and Run All Cells**.
 
-### 3. End-to-End Pipeline Reproduction
+#### 3. Option B: Run the Automated Unit Test Suite (`pytest`)
+Verify all numerical stencils, Simpson's quadrature, cubic splines, physical non-negativity bounds, temporal partition leakage absence, and OOD fault detection:
 
-Execute the full deterministic data pipeline from raw telemetry to publication figures:
+```bash
+pytest -v tests/
+```
+*(Confirms all 13 independent unit and integration tests pass).*
 
-```powershell
-# Step 1: Clean and synchronize 180k env + 9.1M occupancy rows
-.\.venv\Scripts\python.exe -m execution.data_pipeline `
-    --env "Content/5EnvSensor_MayToDec2024_180kRows.csv" `
-    --occ "Content/5occupancySensor_MayToDec2024_9MRows.csv" `
-    --output .tmp/g57_merged_data.parquet
+#### 4. Option C: Modular CLI Execution (Using Bundled Benchmark Data)
+To run individual deterministic modules directly using the included reproducible dataset ([`data/sample_g57_features.parquet`](data/sample_g57_features.parquet)):
 
-# Step 2: Extract numerical derivatives, splines, and exposure features
-.\.venv\Scripts\python.exe -m execution.feature_engineering `
-    --input .tmp/g57_merged_data.parquet `
-    --output .tmp/g57_features_matrix.parquet
-
-# Step 3: Train and evaluate models under chronological 80/20 split
-.\.venv\Scripts\python.exe -m execution.train_and_evaluate `
-    --features .tmp/g57_features_matrix.parquet `
-    --output-metrics .tmp/model_comparison_metrics.json `
+```bash
+# Step 1: Train and evaluate models under chronological 80/20 split
+python -m execution.train_and_evaluate \
+    --features data/sample_g57_features.parquet \
+    --output-metrics .tmp/model_comparison_metrics.json \
     --output-preds .tmp/model_predictions.parquet
 
-# Step 4: Run computational profiling, FLOP calculations, and OOD tests
-.\.venv\Scripts\python.exe -m execution.evaluation_and_profiling `
-    --features .tmp/g57_features_matrix.parquet `
-    --output-val .tmp/validation_report.json `
+# Step 2: Run computational profiling, latency benchmarks, and OOD tests
+python -m execution.evaluation_and_profiling \
+    --features data/sample_g57_features.parquet \
+    --output-val .tmp/validation_report.json \
     --output-prof .tmp/profiling_report.txt
 
-# Step 5: Render all 6 publication figures to deliverables/figures/
-.\.venv\Scripts\python.exe -m execution.visualizations `
-    --features .tmp/g57_features_matrix.parquet `
-    --preds .tmp/model_predictions.parquet `
-    --metrics .tmp/model_comparison_metrics.json `
+# Step 3: Render publication diagnostic figures to deliverables/figures/
+python -m execution.visualizations \
+    --features data/sample_g57_features.parquet \
+    --preds .tmp/model_predictions.parquet \
+    --metrics .tmp/model_comparison_metrics.json \
     --output-dir deliverables/figures
+
+# Step 4: Compile interactive HTML5 source code documentation
+pdoc -o docs -d google --math execution
 ```
 
-### 4. Inspect Interactive Source Code Documentation
-Open the compiled documentation in your default browser:
-
-```powershell
-# Open interactive HTML documentation
-start docs/index.html
-```
+> [!NOTE]
+> **Full Raw Telemetry ETL (Optional):**  
+> The uncompressed raw university IoT telemetry dumps (180,000 environmental records and 9.1 million doorway counter transitions in `Content/`) exceed GitHub file size limits and are internal to Monash University. The repository includes [`data/sample_g57_features.parquet`](data/sample_g57_features.parquet) so that all models, figures, and unit tests reproduce immediately out-of-the-box.  
+> If you have access to the original raw CSV files, you can re-run the out-of-core streaming ingestion and feature derivation from scratch:
+> ```bash
+> python -m execution.data_pipeline --env "path/to/5EnvSensor.csv" --occ "path/to/5occupancySensor.csv" --output .tmp/g57_merged_data.parquet
+> python -m execution.feature_engineering --input .tmp/g57_merged_data.parquet --output .tmp/g57_features_matrix.parquet
+> ```
 
 ---
 
