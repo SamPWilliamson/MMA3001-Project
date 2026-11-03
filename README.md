@@ -53,7 +53,6 @@ The repository is organised into modular, testable components designed for compl
 ├── tests/                             # Unit & Integration test suite
 │   ├── test_numerical_methods.py      # Verification of Taylor stencils, Simpson's quadrature, splines
 │   └── test_pipeline.py               # Verification of physical bounds, leakage absence, OOD flags
-├── .tmp/                              # Intermediate processed data (Parquet, metrics JSON; git-ignored)
 └── README.md                          # Repository guide and reproduction workflow
 ```
 
